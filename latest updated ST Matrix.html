@@ -1,0 +1,2181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ST Matrix 2025 | Web Development & Electronics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS Variables for Theme */
+        :root {
+            --bg-dark: #121212;
+            --bg-darker: #0a0a0a;
+            --text-primary: #e0e0e0;
+            --text-secondary: #a0a0a0;
+            --accent-blue: #00aaff;
+            --accent-teal: #00ffcc;
+            --accent-yellow: #ffcc00;
+            --accent-purple: #aa00ff;
+            --accent-pink: #f72585;
+            --accent-cyan: #4cc9f0;
+            --accent-green: #4ade80;
+            --transition: all 0.3s ease;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            --card-bg: rgba(30, 30, 40, 0.7);
+            --glow-blue: 0 0 15px rgba(0, 170, 255, 0.7);
+            --glow-teal: 0 0 15px rgba(0, 255, 204, 0.7);
+            --glow-yellow: 0 0 15px rgba(255, 204, 0, 0.7);
+            --glow-pink: 0 0 15px rgba(247, 37, 133, 0.7);
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --font-code: 'Fira Code', 'Consolas', monospace;
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: rgba(10, 10, 15, 0.9);
+            padding: 1.2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 170, 255, 0.2);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo h1 {
+            font-size: 1.8rem;
+            background: linear-gradient(to right, var(--accent-blue), var(--accent-teal));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .logo span {
+            color: var(--accent-yellow);
+            background-color: rgba(0, 0, 0, 0.3);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 20px;
+            font-size: 0.9rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-secondary);
+        }
+
+        .contact-item i {
+            color: var(--accent-teal);
+        }
+
+        /* Main Content Container - now 400vw for 4 pages */
+        .main-container {
+            display: flex;
+            width: 400vw; /* Updated for 4 pages */
+            height: calc(100vh - 80px);
+            margin-top: 80px;
+            transition: transform 0.7s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+
+        .page {
+            width: 100vw;
+            height: 100%;
+            padding: 2rem 5%;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        /* Navigation Dots - now 4 dots */
+        .nav-dots {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            z-index: 100;
+        }
+
+        .dot {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background-color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .dot:hover {
+            transform: scale(1.3);
+            background-color: var(--accent-teal);
+            box-shadow: var(--glow-teal);
+        }
+
+        .dot.active {
+            background-color: var(--accent-blue);
+            box-shadow: var(--glow-blue);
+            transform: scale(1.2);
+        }
+
+        .dot::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--bg-darker);
+            color: var(--accent-teal);
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            opacity: 0;
+            transition: var(--transition);
+            pointer-events: none;
+            border: 1px solid rgba(0, 170, 255, 0.3);
+        }
+
+        .dot:hover::after {
+            opacity: 1;
+            right: 35px;
+        }
+
+        /* Page 1: Learn to Code */
+        .page-1 {
+            background: linear-gradient(135deg, var(--bg-dark), #0d1a26);
+        }
+
+        .learning-path {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .path-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .path-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-teal);
+        }
+
+        .path-header p {
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .level-container {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .level {
+            flex: 1;
+            min-width: 300px;
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 1.8rem;
+            box-shadow: var(--box-shadow);
+            border: 1px solid rgba(0, 170, 255, 0.1);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .level:hover {
+            transform: translateY(-5px);
+            border-color: rgba(0, 170, 255, 0.3);
+        }
+
+        .level h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .level.beginner h3 {
+            color: var(--accent-blue);
+        }
+
+        .level.intermediate h3 {
+            color: var(--accent-pink);
+        }
+
+        .level.advanced h3 {
+            color: var(--accent-yellow);
+        }
+
+        /* Beginner Path Styles */
+        .beginner-path-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: none;
+        }
+
+        .beginner-path-container.active {
+            display: block;
+        }
+
+        /* Intermediate Path Styles */
+        .intermediate-path-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: none;
+        }
+
+        .intermediate-path-container.active {
+            display: block;
+        }
+
+        /* Advanced Path Styles */
+        .advanced-path-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: none;
+        }
+
+        .advanced-path-container.active {
+            display: block;
+        }
+
+        .cover-page {
+            background: linear-gradient(120deg, #0d1a26, #1a2e4d);
+            color: white;
+            padding: 80px 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cover-page.intermediate {
+            background: linear-gradient(120deg, #1a0d26, #3a0ca3);
+        }
+
+        .cover-page h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, var(--accent-blue), var(--accent-teal));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .cover-page.intermediate h1 {
+            background: linear-gradient(to right, var(--accent-pink), var(--accent-cyan));
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+
+        .cover-page p {
+            font-size: 1.4rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        .author {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            padding: 8px 20px;
+            border-radius: 30px;
+            margin-top: 20px;
+            font-size: 1.1rem;
+            backdrop-filter: blur(5px);
+        }
+
+        .quote {
+            font-style: italic;
+            font-size: 1.3rem;
+            margin-top: 30px;
+            position: relative;
+            padding: 20px;
+            border-radius: 12px;
+            background: rgba(0,0,0,0.15);
+            max-width: 700px;
+            margin: 30px auto 0;
+        }
+
+        .toc-container {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .toc-title {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+            color: var(--accent-blue);
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .toc-title.intermediate {
+            color: var(--accent-pink);
+        }
+
+        .toc-title i {
+            font-size: 1.6rem;
+        }
+
+        .toc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .toc-card {
+            background: rgba(30, 40, 60, 0.5);
+            border-radius: 12px;
+            padding: 20px;
+            transition: var(--transition);
+            border-left: 4px solid var(--accent-blue);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .toc-card.intermediate {
+            border-left: 4px solid var(--accent-pink);
+        }
+
+        .toc-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            border-left-color: var(--accent-teal);
+        }
+
+        .toc-card.intermediate:hover {
+            border-left-color: var(--accent-cyan);
+        }
+
+        .toc-card h3 {
+            color: var(--text-primary);
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .toc-card h3 i {
+            color: var(--accent-blue);
+            font-size: 1.2rem;
+        }
+
+        .toc-card.intermediate h3 i {
+            color: var(--accent-pink);
+        }
+
+        .toc-card ul {
+            list-style: none;
+            padding-left: 10px;
+        }
+
+        .toc-card li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .toc-card li::before {
+            content: "•";
+            color: var(--accent-teal);
+            font-size: 1.5rem;
+            position: absolute;
+            left: 0;
+            top: -5px;
+        }
+
+        .toc-card.intermediate li::before {
+            color: var(--accent-pink);
+        }
+
+        .content-section {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 40px;
+            margin-bottom: 40px;
+            box-shadow: var(--box-shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--accent-blue), var(--accent-teal));
+        }
+
+        .content-section.intermediate::before {
+            background: linear-gradient(to bottom, var(--accent-pink), var(--accent-cyan));
+        }
+
+        .content-section h1 {
+            color: var(--accent-blue);
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(255,255,255,0.1);
+        }
+
+        .content-section.intermediate h1 {
+            color: var(--accent-pink);
+        }
+
+        .content-section h2 {
+            color: var(--accent-teal);
+            font-size: 1.8rem;
+            margin: 30px 0 20px;
+            padding-left: 15px;
+            border-left: 4px solid var(--accent-teal);
+        }
+
+        .content-section.intermediate h2 {
+            color: var(--accent-cyan);
+            border-left: 4px solid var(--accent-cyan);
+        }
+
+        .content-section p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .content-section ul {
+            padding-left: 30px;
+            margin-bottom: 25px;
+        }
+
+        .content-section li {
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
+
+        .content-section pre {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 25px;
+            border-radius: 12px;
+            overflow-x: auto;
+            margin: 25px 0;
+            box-shadow: inset 0 0 15px rgba(0,0,0,0.3);
+            position: relative;
+            font-family: var(--font-code);
+            font-size: 1rem;
+            line-height: 1.6;
+            border-left: 4px solid var(--accent-yellow);
+        }
+
+        .content-section.intermediate pre {
+            border-left: 4px solid var(--accent-pink);
+        }
+
+        .content-section pre::before {
+            content: "CODE";
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--accent-yellow);
+            color: var(--bg-darker);
+            font-size: 0.8rem;
+            padding: 5px 15px;
+            border-radius: 0 0 0 8px;
+            font-weight: bold;
+        }
+
+        .content-section.intermediate pre::before {
+            background: var(--accent-pink);
+        }
+
+        .content-section code {
+            background: rgba(41, 98, 255, 0.1);
+            color: var(--accent-blue);
+            padding: 4px 8px;
+            border-radius: 5px;
+            font-family: var(--font-code);
+            font-size: 1rem;
+            border: 1px solid rgba(41, 98, 255, 0.2);
+        }
+
+        .exercise, .tip {
+            padding: 25px;
+            border-radius: 12px;
+            margin: 30px 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .exercise {
+            background: linear-gradient(135deg, rgba(0, 170, 255, 0.1), rgba(0, 119, 255, 0.1));
+            border-left: 4px solid var(--accent-blue);
+        }
+
+        .tip {
+            background: linear-gradient(135deg, rgba(0, 255, 204, 0.1), rgba(0, 200, 150, 0.1));
+            border-left: 4px solid var(--accent-teal);
+        }
+
+        .exercise.intermediate {
+            background: linear-gradient(135deg, rgba(247, 37, 133, 0.1), rgba(76, 201, 240, 0.1));
+            border-left: 4px solid var(--accent-pink);
+        }
+
+        .tip.intermediate {
+            background: linear-gradient(135deg, rgba(76, 201, 240, 0.1), rgba(74, 222, 128, 0.1));
+            border-left: 4px solid var(--accent-cyan);
+        }
+
+        .exercise h3, .tip h3 {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .exercise h3 {
+            color: var(--accent-blue);
+        }
+
+        .tip h3 {
+            color: var(--accent-teal);
+        }
+
+        .exercise.intermediate h3 {
+            color: var(--accent-pink);
+        }
+
+        .tip.intermediate h3 {
+            color: var(--accent-cyan);
+        }
+
+        .back-to-levels {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 170, 255, 0.1);
+            color: var(--accent-blue);
+            padding: 10px 20px;
+            border-radius: 30px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1px solid rgba(0, 170, 255, 0.3);
+        }
+
+        .back-to-levels.intermediate {
+            background: rgba(247, 37, 133, 0.1);
+            color: var(--accent-pink);
+            border: 1px solid rgba(247, 37, 133, 0.3);
+        }
+
+        .back-to-levels:hover {
+            background: rgba(0, 170, 255, 0.2);
+            transform: translateX(-5px);
+        }
+
+        .back-to-levels.intermediate:hover {
+            background: rgba(247, 37, 133, 0.2);
+        }
+
+        /* Page 2: Electronics Shop */
+        .page-2 {
+            background: linear-gradient(135deg, var(--bg-dark), #1a0d26);
+        }
+
+        .shop-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .shop-header h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent-purple);
+        }
+
+        .shop-header p {
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .shop-tools {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 2rem;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .search-box {
+            flex: 1;
+            max-width: 400px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.8rem 1rem 0.8rem 40px;
+            background: var(--card-bg);
+            border: 1px solid rgba(170, 0, 255, 0.2);
+            border-radius: 30px;
+            color: var(--text-primary);
+            font-size: 1rem;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent-purple);
+        }
+
+        .filters {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: var(--card-bg);
+            color: var(--text-primary);
+            border: 1px solid rgba(170, 0, 255, 0.2);
+            padding: 0.6rem 1.2rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            background: rgba(170, 0, 255, 0.1);
+            border-color: var(--accent-purple);
+            color: var(--accent-purple);
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid rgba(170, 0, 255, 0.1);
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            border-color: rgba(170, 0, 255, 0.3);
+        }
+
+        .product-image {
+            height: 200px;
+            background: #1a1426;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image i {
+            font-size: 3rem;
+            color: var(--accent-purple);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--accent-yellow);
+            color: #000;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--accent-teal);
+        }
+
+        .product-info p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+            min-height: 60px;
+        }
+
+        .product-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--accent-yellow);
+        }
+
+        .add-to-cart {
+            background: rgba(170, 0, 255, 0.1);
+            color: var(--accent-purple);
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .add-to-cart:hover {
+            background: rgba(170, 0, 255, 0.2);
+            transform: scale(1.1);
+        }
+        
+        /* Cart */
+        .cart-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--bg-darker);
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--box-shadow);
+            border: 1px solid rgba(170, 0, 255, 0.3);
+            z-index: 200;
+            transition: var(--transition);
+        }
+        
+        .cart-container:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(170, 0, 255, 0.5);
+        }
+        
+        .cart-icon {
+            font-size: 1.8rem;
+            color: var(--accent-purple);
+            position: relative;
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: var(--accent-yellow);
+            color: #000;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        /* Page 4: Intermediate Concepts */
+        .page-4 {
+            background: linear-gradient(135deg, var(--bg-dark), #1a0d26);
+        }
+
+        /* Intermediate concepts styles */
+        .concepts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .concept-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .concept-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .concept-card h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .concept-card h2 i {
+            color: var(--accent-cyan);
+        }
+
+        .card-content {
+            margin-bottom: 20px;
+        }
+
+        .card-content p {
+            margin-bottom: 15px;
+        }
+
+        .example-container {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .example-title {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+            color: var(--accent-cyan);
+        }
+
+        /* CSS Layouts Demo */
+        .layout-demo {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .demo-item {
+            background: var(--accent-pink);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .demo-item:hover {
+            transform: scale(1.05);
+            background: var(--accent-purple);
+        }
+
+        /* Responsive Design Demo */
+        .responsive-demo {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .device {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .device:hover {
+            background: rgba(76, 201, 240, 0.2);
+        }
+
+        .device i {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            display: block;
+            color: var(--accent-cyan);
+        }
+
+        /* JavaScript Demo */
+        .js-demo {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .demo-btn {
+            flex: 1;
+            background: var(--accent-pink);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .demo-btn:hover {
+            background: var(--accent-purple);
+        }
+
+        .demo-btn:active {
+            transform: translateY(2px);
+        }
+
+        #dynamicContent {
+            min-height: 100px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .news-item {
+            padding: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .news-item:last-child {
+            border-bottom: none;
+        }
+
+        .key-points {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .key-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 20px;
+            border-left: 4px solid var(--accent-cyan);
+            transition: transform 0.3s ease;
+        }
+
+        .key-card:hover {
+            transform: translateX(10px);
+        }
+
+        .key-card h3 {
+            margin-bottom: 10px;
+            color: var(--accent-green);
+        }
+
+        .tools-table {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            border-collapse: collapse;
+            margin: 30px 0;
+            overflow: hidden;
+        }
+
+        .tools-table th, .tools-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .tools-table th {
+            background: rgba(76, 201, 240, 0.2);
+            color: var(--accent-cyan);
+        }
+
+        .tools-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .tools-table tr {
+            transition: background 0.3s ease;
+        }
+
+        .tools-table tr:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .code-block {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: var(--font-code);
+            font-size: 0.9rem;
+            overflow-x: auto;
+        }
+
+        .code-block code {
+            color: var(--accent-cyan);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-darker);
+            padding: 2rem 5%;
+            text-align: center;
+            border-top: 1px solid rgba(0, 170, 255, 0.1);
+        }
+
+        .about {
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .about h3 {
+            color: var(--accent-blue);
+            margin-bottom: 1rem;
+        }
+
+        .about p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .footer-contact {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+        }
+
+        .footer-contact-item i {
+            color: var(--accent-teal);
+        }
+
+        .copyright {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .level-container {
+                flex-direction: column;
+            }
+            
+            .nav-dots {
+                right: 15px;
+            }
+            
+            .contact-info {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            }
+            
+            .shop-tools {
+                flex-direction: column;
+            }
+            
+            .search-box {
+                max-width: 100%;
+            }
+            
+            .filters {
+                flex-wrap: wrap;
+            }
+            
+            .path-header h2, .shop-header h2 {
+                font-size: 2rem;
+            }
+            
+            .cover-page h1 {
+                font-size: 2.5rem;
+            }
+            
+            .cover-page p {
+                font-size: 1.1rem;
+            }
+            
+            .concepts-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .responsive-demo {
+                flex-direction: column;
+            }
+            
+            .controls {
+                flex-direction: column;
+            }
+            
+            .layout-demo {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo h1 {
+                font-size: 1.4rem;
+            }
+            
+            .logo span {
+                font-size: 0.7rem;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-contact {
+                flex-direction: column;
+                gap: 0.8rem;
+                align-items: center;
+            }
+            
+            .cart-container {
+                width: 60px;
+                height: 60px;
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .cover-page {
+                padding: 40px 20px;
+            }
+            
+            .cover-page h1 {
+                font-size: 2rem;
+            }
+            
+            .toc-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .layout-demo {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <h1>ST MATRIX <span>2025 EDITION</span></h1>
+        </div>
+        <div class="contact-info">
+            <div class="contact-item">
+                <i class="fas fa-phone"></i>
+                <span>0732 990 764</span>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i>
+                <span>thapeloshaun221@gmail</span>
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>67 Nelson Mandela Dr, Mokopane, 0601</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Dots - now 4 dots -->
+    <div class="nav-dots">
+        <div class="dot active" data-tooltip="Learn to Code" onclick="scrollToPage(0)"></div>
+        <div class="dot" data-tooltip="Electronics Shop" onclick="scrollToPage(1)"></div>
+        <div class="dot" data-tooltip="Intermediate" onclick="scrollToPage(3)"></div>
+        <div class="dot" data-tooltip="Advanced" onclick="scrollToPage(2)"></div>
+    </div>
+
+    <!-- Cart Button -->
+    <div class="cart-container" id="cartButton">
+        <div class="cart-icon">
+            <i class="fas fa-shopping-cart"></i>
+            <div class="cart-count">0</div>
+        </div>
+    </div>
+
+    <!-- Main Content - now 4 pages -->
+    <div class="main-container" id="mainContainer">
+        <!-- Page 1: Learn to Code -->
+        <section class="page page-1">
+            <div class="learning-path" id="learningOverview">
+                <div class="path-header">
+                    <h2><i class="fas fa-code"></i> Learn to Code</h2>
+                    <p>Master web development from beginner to advanced with our structured learning path. Practice with real code examples and build your skills step-by-step.</p>
+                </div>
+
+                <div class="level-container">
+                    <!-- Beginner Level -->
+                    <div class="level beginner" onclick="showBeginnerPath()">
+                        <h3><i class="fas fa-seedling"></i> Beginner</h3>
+                        <p>Start your journey with the fundamentals of web development. Learn to structure content and create basic web pages.</p>
+                        <p class="click-hint"><i class="fas fa-hand-pointer"></i> Click to view full beginner path</p>
+                    </div>
+                    
+                    <!-- Intermediate Level -->
+                    <div class="level intermediate" onclick="showIntermediatePath()">
+                        <h3><i class="fas fa-cogs"></i> Intermediate</h3>
+                        <p>Enhance your websites with styling, interactivity, and responsive design techniques.</p>
+                        <p class="click-hint"><i class="fas fa-hand-pointer"></i> Click to view intermediate concepts</p>
+                    </div>
+                    
+                    <!-- Advanced Level -->
+                    <div class="level advanced" onclick="showAdvancedPath()">
+                        <h3><i class="fas fa-rocket"></i> Advanced</h3>
+                        <p>Build complex applications with modern frameworks, APIs, and deployment strategies.</p>
+                        <p class="click-hint"><i class="fas fa-hand-pointer"></i> Click to view advanced concepts</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Beginner Path Content -->
+            <div class="beginner-path-container" id="beginnerPath">
+                <div class="back-to-levels" onclick="hideBeginnerPath()">
+                    <i class="fas fa-arrow-left"></i> Back to Learning Paths
+                </div>
+                
+                <div class="cover-page">
+                    <h1>Learn to Code – Beginner Path</h1>
+                    <p>Your comprehensive journey into web development</p>
+                    <div class="author">By TS Mashaba</div>
+                    <div class="quote">"Start building the web — one line of code at a time."</div>
+                </div>
+
+                <!-- Table of Contents -->
+                <div class="toc-container">
+                    <div class="toc-title">
+                        <i class="fas fa-book"></i>
+                        <h2>Table of Contents</h2>
+                    </div>
+                    <div class="toc-grid">
+                        <div class="toc-card">
+                            <h3><i class="fas fa-compass"></i> Getting Started</h3>
+                            <ul>
+                                <li>Introduction to Web Development</li>
+                                <li>Tools & Resources</li>
+                                <li>How Websites Work</li>
+                            </ul>
+                        </div>
+                        <div class="toc-card">
+                            <h3><i class="fab fa-html5"></i> HTML Mastery</h3>
+                            <ul>
+                                <li>HTML Basics & Structure</li>
+                                <li>Essential HTML Elements</li>
+                                <li>Semantic HTML</li>
+                                <li>Forms & Inputs</li>
+                            </ul>
+                        </div>
+                        <div class="toc-card">
+                            <h3><i class="fab fa-css3-alt"></i> CSS Fundamentals</h3>
+                            <ul>
+                                <li>CSS Selectors & Properties</li>
+                                <li>Layout Techniques</li>
+                                <li>Responsive Design</li>
+                                <li>CSS Frameworks</li>
+                            </ul>
+                        </div>
+                        <div class="toc-card">
+                            <h3><i class="fab fa-js"></i> JavaScript Essentials</h3>
+                            <ul>
+                                <li>JavaScript Basics</li>
+                                <li>DOM Manipulation</li>
+                                <li>Events & Handlers</li>
+                                <li>Intro to APIs</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Introduction -->
+                <div class="content-section">
+                    <h1><i class="fas fa-star"></i> 1. Introduction to Web Development</h1>
+                    <p>Web development is the art and science of building websites and web applications that run online. It combines creativity with technical skills to create engaging digital experiences.</p>
+                    
+                    <h2>Key Areas of Web Development</h2>
+                    <ul>
+                        <li><strong>Frontend (Client-side)</strong>: What users see and interact with (HTML, CSS, JavaScript)</li>
+                        <li><strong>Backend (Server-side)</strong>: The behind-the-scenes logic (databases, servers, APIs)</li>
+                        <li><strong>Full-stack Development</strong>: Combining both frontend and backend skills</li>
+                    </ul>
+                    
+                    <div class="tip">
+                        <h3><i class="fas fa-lightbulb"></i> Real-World Analogy</h3>
+                        <p>Think of a website as a house: 
+                            <strong>HTML</strong> is the structure (walls, roof), 
+                            <strong>CSS</strong> is the decoration (paint, furniture), 
+                            <strong>JavaScript</strong> is the functionality (electricity, plumbing), and 
+                            <strong>Backend</strong> is the foundation and utilities (plumbing system, electrical grid).
+                        </p>
+                    </div>
+                    
+                    <div class="exercise">
+                        <h3><i class="fas fa-pencil-alt"></i> Exercise: Website Analysis</h3>
+                        <p>Visit 3 websites you use daily (e.g., YouTube, Twitter, Wikipedia). Identify:</p>
+                        <ol>
+                            <li>Different HTML elements used (headings, paragraphs, images)</li>
+                            <li>CSS styling choices (colors, layout, spacing)</li>
+                            <li>Interactive JavaScript features (buttons, forms, animations)</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- HTML Basics -->
+                <div class="content-section">
+                    <h1><i class="fab fa-html5"></i> 2. HTML Basics</h1>
+                    <p>HTML (HyperText Markup Language) is the skeleton of every webpage. It provides the structure and content for your site.</p>
+                    
+                    <h2>Basic HTML Structure</h2>
+                    <p>Every HTML document follows this fundamental structure:</p>
+                    
+                    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;My First Webpage&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Hello, World!&lt;/h1&gt;
+    &lt;p&gt;This is my first webpage.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                    
+                    <h2>Essential HTML Elements</h2>
+                    <ul>
+                        <li><code>&lt;a href="https://example.com"&gt;Link Text&lt;/a&gt;</code> - Creates hyperlinks</li>
+                        <li><code>&lt;img src="image.jpg" alt="Description"&gt;</code> - Embeds images</li>
+                        <li><code>&lt;ul&gt;&lt;li&gt;Item&lt;/li&gt;&lt;/ul&gt;</code> - Unordered lists</li>
+                        <li><code>&lt;div&gt;Content&lt;/div&gt;</code> - Content division container</li>
+                        <li><code>&lt;button&gt;Click Me&lt;/button&gt;</code> - Interactive button</li>
+                        <li><code>&lt;input type="text" placeholder="Enter text"&gt;</code> - Text input field</li>
+                    </ul>
+                    
+                    <div class="tip">
+                        <h3><i class="fas fa-code"></i> Semantic HTML Tip</h3>
+                        <p>Use semantic elements for better accessibility and SEO:</p>
+                        <ul>
+                            <li><code>&lt;header&gt;</code> for introductory content</li>
+                            <li><code>&lt;nav&gt;</code> for navigation menus</li>
+                            <li><code>&lt;main&gt;</code> for the primary content</li>
+                            <li><code>&lt;article&gt;</code> for self-contained content</li>
+                            <li><code>&lt;footer&gt;</code> for footer information</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="exercise">
+                        <h3><i class="fas fa-laptop-code"></i> HTML Practice</h3>
+                        <p>Create a simple "About Me" webpage with:</p>
+                        <ol>
+                            <li>A heading with your name</li>
+                            <li>A short bio paragraph</li>
+                            <li>An image of yourself or an avatar</li>
+                            <li>A list of your hobbies</li>
+                            <li>A link to your favorite website</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <!-- CSS Fundamentals -->
+                <div class="content-section">
+                    <h1><i class="fab fa-css3-alt"></i> 3. CSS Fundamentals</h1>
+                    <p>CSS (Cascading Style Sheets) brings your HTML to life with colors, layouts, and visual effects.</p>
+                    
+                    <h2>CSS Fundamentals</h2>
+                    <p>CSS works by selecting HTML elements and applying styles to them:</p>
+                    
+                    <pre><code>/* Select all h1 elements */
+h1 {
+    color: navy;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+/* Select elements with class="highlight" */
+.highlight {
+    background-color: yellow;
+    padding: 5px 10px;
+}
+
+/* Select element with id="main-content" */
+#main-content {
+    max-width: 800px;
+    margin: 0 auto;
+}</code></pre>
+                    
+                    <h2>Key CSS Concepts</h2>
+                    <ul>
+                        <li><strong>Box Model</strong>: Content, padding, border, margin</li>
+                        <li><strong>Flexbox</strong>: Modern layout system for one-dimensional layouts</li>
+                        <li><strong>Grid</strong>: Powerful two-dimensional layout system</li>
+                        <li><strong>Responsive Design</strong>: Using media queries to adapt to different screen sizes</li>
+                    </ul>
+                    
+                    <div class="tip">
+                        <h3><i class="fas fa-mobile-alt"></i> Responsive Design Tip</h3>
+                        <p>Use this media query to apply styles for mobile devices:</p>
+                        <pre><code>@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+    
+    .sidebar {
+        width: 100%;
+    }
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Page 2: Electronics Shop -->
+        <section class="page page-2">
+            <div class="shop-header">
+                <h2><i class="fas fa-laptop-code"></i> Developer Electronics</h2>
+                <p>Curated gear to enhance your coding experience and productivity. All products selected with developers in mind.</p>
+            </div>
+
+            <div class="shop-tools">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search for products...">
+                </div>
+                <div class="filters">
+                    <button class="filter-btn active">All</button>
+                    <button class="filter-btn">Audio</button>
+                    <button class="filter-btn">Accessories</button>
+                    <button class="filter-btn">Workspace</button>
+                    <button class="filter-btn">Peripherals</button>
+                </div>
+            </div>
+
+            <div class="products-grid">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-headphones"></i>
+                        <div class="product-badge">NEW</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Pro Coding Headphones</h3>
+                        <p>Noise-cancelling headphones with crystal clear audio. Perfect for focused coding sessions and online meetings.</p>
+                        <div class="product-price">
+                            <div class="price">R1,299</div>
+                            <button class="add-to-cart" data-id="1" data-name="Pro Coding Headphones" data-price="1299">
+                                <i class="fas fa-cart-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-keyboard"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Mechanical Dev Keyboard</h3>
+                        <p>Tenkeyless mechanical keyboard with responsive switches and programmable macros for efficient coding.</p>
+                        <div class="product-price">
+                            <div class="price">R899</div>
+                            <button class="add-to-cart" data-id="2" data-name="Mechanical Dev Keyboard" data-price="899">
+                                <i class="fas fa-cart-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-laptop"></i>
+                        <div class="product-badge">BEST SELLER</div>
+                    </div>
+                    <div class="product-info">
+                        <h3>Ergonomic Laptop Stand</h3>
+                        <p>Adjustable stand that elevates your laptop to eye level, promoting better posture during long coding sessions.</p>
+                        <div class="product-price">
+                            <div class="price">R450</div>
+                            <button class="add-to-cart" data-id="3" data-name="Ergonomic Laptop Stand" data-price="450">
+                                <i class="fas fa-cart-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 4 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>USB-C Power Hub</h3>
+                        <p>4-port USB-C hub with power delivery, perfect for developers with multiple devices and peripherals.</p>
+                        <div class="product-price">
+                            <div class="price">R350</div>
+                            <button class="add-to-cart" data-id="4" data-name="USB-C Power Hub" data-price="350">
+                                <i class="fas fa-cart-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 5 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Phone Mount for Desk</h3>
+                        <p>Adjustable phone holder that clips to your monitor, keeping your device visible during development.</p>
+                        <div class="product-price">
+                            <div class="price">R220</div>
+                            <button class="add-to-cart" data-id="5" data-name="Phone Mount for Desk" data-price="220">
+                                <i class="fas fa-cart-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 6 -->
+                <div class="product-card">
+                    <div class="product-image">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <div class="product-info">
+                        <h3>Desk Lamp with USB</h3>
+                        <p>LED desk lamp with adjustable color temperature and built-in USB ports for charging devices.</p>
+                        <div class="product-price">
+                            <div class="price">R550</div>
+                            <button class="add-to-cart" data-id="6" data-name="Desk Lamp with USB" data-price="550">
+                                <i class="fas fa-cart-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Page 3: Advanced Concepts -->
+        <section class="page page-3">
+            <div class="back-to-levels" onclick="hideAdvancedPath()">
+                <i class="fas fa-arrow-left"></i> Back to Learning Paths
+            </div>
+            
+            <div class="advanced-path-container" id="advancedPath">
+                <div class="cover-page">
+                    <h1>Advanced Web Development</h1>
+                    <p>Master modern frameworks, APIs, deployment strategies, and security practices</p>
+                    <div class="author">By ST Matrix</div>
+                    <div class="quote">"Building the future of the web, one advanced concept at a time."</div>
+                </div>
+                
+                <div class="toc-container">
+                    <div class="toc-title">
+                        <i class="fas fa-book"></i>
+                        <h2>Advanced Concepts</h2>
+                    </div>
+                    <div class="toc-grid">
+                        <div class="toc-card">
+                            <h3><i class="fas fa-cubes"></i> Modern Frameworks</h3>
+                            <ul>
+                                <li>React & Next.js</li>
+                                <li>Vue & Nuxt.js</li>
+                                <li>Svelte & SvelteKit</li>
+                                <li>Angular</li>
+                            </ul>
+                        </div>
+                        <div class="toc-card">
+                            <h3><i class="fas fa-plug"></i> APIs & Deployment</h3>
+                            <ul>
+                                <li>REST & GraphQL APIs</li>
+                                <li>CI/CD Pipelines</li>
+                                <li>Serverless Architecture</li>
+                                <li>Containerization</li>
+                            </ul>
+                        </div>
+                        <div class="toc-card">
+                            <h3><i class="fab fa-js"></i> Modern JavaScript</h3>
+                            <ul>
+                                <li>ES6+ Features</li>
+                                <li>TypeScript</li>
+                                <li>Web Components</li>
+                                <li>WebAssembly</li>
+                            </ul>
+                        </div>
+                        <div class="toc-card">
+                            <h3><i class="fas fa-shield-alt"></i> Security</h3>
+                            <ul>
+                                <li>Authentication & OAuth</li>
+                                <li>Data Encryption</li>
+                                <li>Security Headers</li>
+                                <li>Vulnerability Scanning</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Advanced content would go here -->
+            </div>
+        </section>
+        
+        <!-- Page 4: Intermediate Concepts -->
+        <section class="page page-4">
+            <div class="back-to-levels intermediate" onclick="hideIntermediatePath()">
+                <i class="fas fa-arrow-left"></i> Back to Learning Paths
+            </div>
+            
+            <div class="intermediate-path-container" id="intermediatePath">
+                <div class="cover-page intermediate">
+                    <h1>Intermediate Web Development</h1>
+                    <p>Master CSS layouts, responsive design, and JavaScript interactivity</p>
+                    <div class="author">By ST Matrix</div>
+                    <div class="quote">"Where design meets functionality - the art of modern web development"</div>
+                </div>
+                
+                <div class="toc-container">
+                    <div class="toc-title intermediate">
+                        <i class="fas fa-book"></i>
+                        <h2>Intermediate Concepts</h2>
+                    </div>
+                    <div class="toc-grid">
+                        <div class="toc-card intermediate">
+                            <h3><i class="fas fa-th-large"></i> CSS Layouts</h3>
+                            <ul>
+                                <li>Flexbox Fundamentals</li>
+                                <li>CSS Grid Systems</li>
+                                <li>Complex Layout Techniques</li>
+                                <li>Practical Layout Examples</li>
+                            </ul>
+                        </div>
+                        <div class="toc-card intermediate">
+                            <h3><i class="fas fa-mobile-alt"></i> Responsive Design</h3>
+                            <ul>
+                                <li>Media Queries</li>
+                                <li>Fluid Layouts</li>
+                                <li>Adaptive Components</li>
+                                <li>Mobile-First Approach</li>
+                            </ul>
+                        </div>
+                        <div class="toc-card intermediate">
+                            <h3><i class="fab fa-js"></i> JavaScript Interactivity</h3>
+                            <ul>
+                                <li>DOM Manipulation</li>
+                                <li>Event Handling</li>
+                                <li>Dynamic Content</li>
+                                <li>API Integration</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="concepts-grid">
+                    <!-- CSS Layouts Card -->
+                    <div class="concept-card">
+                        <h2><i class="fas fa-th-large"></i> CSS Layouts: Flexbox & Grid</h2>
+                        <div class="card-content">
+                            <p>Create complex, responsive layouts with modern CSS techniques.</p>
+                            
+                            <div class="example-container">
+                                <div class="example-title">Grid Layout Example</div>
+                                <div class="layout-demo">
+                                    <div class="demo-item">Header</div>
+                                    <div class="demo-item">Navigation</div>
+                                    <div class="demo-item">Main Content</div>
+                                    <div class="demo-item">Sidebar</div>
+                                    <div class="demo-item">Feature 1</div>
+                                    <div class="demo-item">Feature 2</div>
+                                    <div class="demo-item">Footer</div>
+                                </div>
+                            </div>
+                            
+                            <div class="example-container">
+                                <div class="example-title">Flexbox Navigation</div>
+                                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                                    <div style="background: var(--accent-pink); padding: 10px 15px; border-radius: 5px;">Home</div>
+                                    <div style="background: var(--accent-pink); padding: 10px 15px; border-radius: 5px;">Products</div>
+                                    <div style="background: var(--accent-pink); padding: 10px 15px; border-radius: 5px;">Services</div>
+                                    <div style="background: var(--accent-pink); padding: 10px 15px; border-radius: 5px;">About</div>
+                                    <div style="background: var(--accent-pink); padding: 10px 15px; border-radius: 5px;">Contact</div>
+                                </div>
+                            </div>
+                            
+                            <div class="code-block">
+/* Grid layout */
+.layout-demo {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+/* Flexbox navigation */
+.nav {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Responsive Design Card -->
+                    <div class="concept-card">
+                        <h2><i class="fas fa-mobile-alt"></i> Responsive Design</h2>
+                        <div class="card-content">
+                            <p>Create websites that work beautifully on all devices.</p>
+                            
+                            <div class="example-container">
+                                <div class="example-title">Device Adaptation</div>
+                                <div class="responsive-demo">
+                                    <div class="device">
+                                        <i class="fas fa-mobile"></i>
+                                        <div>Mobile</div>
+                                        <small>Max-width: 480px</small>
+                                    </div>
+                                    <div class="device">
+                                        <i class="fas fa-tablet-alt"></i>
+                                        <div>Tablet</div>
+                                        <small>Max-width: 768px</small>
+                                    </div>
+                                    <div class="device">
+                                        <i class="fas fa-laptop"></i>
+                                        <div>Desktop</div>
+                                        <small>Min-width: 769px</small>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="example-container">
+                                <div class="example-title">Responsive Gallery</div>
+                                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px;">
+                                    <div style="background: var(--accent-cyan); aspect-ratio: 1/1; border-radius: 8px; display: flex; align-items: center; justify-content: center;">1</div>
+                                    <div style="background: var(--accent-cyan); aspect-ratio: 1/1; border-radius: 8px; display: flex; align-items: center; justify-content: center;">2</div>
+                                    <div style="background: var(--accent-cyan); aspect-ratio: 1/1; border-radius: 8px; display: flex; align-items: center; justify-content: center;">3</div>
+                                    <div style="background: var(--accent-cyan); aspect-ratio: 1/1; border-radius: 8px; display: flex; align-items: center; justify-content: center;">4</div>
+                                </div>
+                            </div>
+                            
+                            <div class="code-block">
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  .concepts-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Responsive gallery */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 10px;
+}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- JavaScript Card -->
+                    <div class="concept-card">
+                        <h2><i class="fab fa-js"></i> JavaScript Interactivity</h2>
+                        <div class="card-content">
+                            <p>Add dynamic behavior and update content without page reloads.</p>
+                            
+                            <div class="example-container">
+                                <div class="example-title">Dynamic Content Example</div>
+                                <div class="js-demo">
+                                    <div class="controls">
+                                        <button class="demo-btn" id="loadNews"><i class="fas fa-newspaper"></i> Load News</button>
+                                        <button class="demo-btn" id="changeColor"><i class="fas fa-palette"></i> Change Theme</button>
+                                        <button class="demo-btn" id="addItem"><i class="fas fa-plus"></i> Add Item</button>
+                                    </div>
+                                    <div id="dynamicContent">
+                                        <p>Content will appear here when you interact with the buttons.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="example-container">
+                                <div class="example-title">Counter Example</div>
+                                <div style="display: flex; align-items: center; gap: 15px; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px;">
+                                    <button class="demo-btn" id="decrement" style="padding: 10px 20px;"><i class="fas fa-minus"></i></button>
+                                    <div id="counterValue" style="font-size: 1.5rem; font-weight: bold;">0</div>
+                                    <button class="demo-btn" id="increment" style="padding: 10px 20px;"><i class="fas fa-plus"></i></button>
+                                </div>
+                            </div>
+                            
+                            <div class="code-block">
+// JavaScript event handling
+document.getElementById('loadNews')
+  .addEventListener('click', loadNews);
+
+// DOM manipulation
+function loadNews() {
+  const content = document.getElementById('dynamicContent');
+  content.innerHTML = '&lt;p&gt;Loading...&lt;/p&gt;';
+  // Fetch data and update content
+}
+
+// Counter functionality
+let count = 0;
+document.getElementById('increment')
+  .addEventListener('click', () => {
+    count++;
+    document.getElementById('counterValue')
+      .textContent = count;
+  });
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="key-points">
+                    <div class="key-card">
+                        <h3>CSS Layouts</h3>
+                        <p>Flexbox for 1D layouts and Grid for 2D layouts provide powerful tools for creating complex, responsive designs.</p>
+                    </div>
+                    <div class="key-card">
+                        <h3>Responsive Design</h3>
+                        <p>Use fluid grids, flexible images, and media queries to adapt layouts to different screen sizes.</p>
+                    </div>
+                    <div class="key-card">
+                        <h3>JavaScript Interactivity</h3>
+                        <p>Create dynamic, engaging experiences with DOM manipulation and asynchronous data loading.</p>
+                    </div>
+                </div>
+                
+                <h2 style="text-align: center; margin: 30px 0; color: var(--accent-cyan);">Web Development Tools</h2>
+                <table class="tools-table">
+                    <tr>
+                        <th>Concept</th>
+                        <th>Tools/APIs</th>
+                        <th>Use Cases</th>
+                    </tr>
+                    <tr>
+                        <td><strong>CSS Layouts</strong></td>
+                        <td>Flexbox, Grid, positioning</td>
+                        <td>Page structure, component layout, alignment</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Responsive Design</strong></td>
+                        <td>Media queries, relative units, flex-wrap</td>
+                        <td>Mobile-friendly sites, adaptive components</td>
+                    </tr>
+                    <tr>
+                        <td><strong>JS Interactivity</strong></td>
+                        <td>DOM API, Fetch API, Event Listeners</td>
+                        <td>Dynamic content, form validation, animations</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="about">
+            <h3>About ST Matrix</h3>
+            <p>ST Matrix is dedicated to empowering aspiring web developers with comprehensive learning resources and curated tools. Our mission is to provide a clear path from beginner to advanced web development while supporting the developer community with quality gear and accessories.</p>
+        </div>
+        
+        <div class="footer-contact">
+            <div class="footer-contact-item">
+                <i class="fas fa-phone"></i>
+                <span>0732 990 764</span>
+            </div>
+            <div class="footer-contact-item">
+                <i class="fas fa-envelope"></i>
+                <span>thapeloshaun221@gmail</span>
+            </div>
+            <div class="footer-contact-item">
+                <i class="fas fa-map-marker-alt"></i>
+                <span>67 Nelson Mandela Dr, Mokopane, 0601</span>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            ST Matrix • 2025 Edition • Empowering Developers Since 2021
+        </div>
+    </footer>
+
+    <script>
+        // Navigation and page scrolling
+        function scrollToPage(pageIndex) {
+            const container = document.getElementById('mainContainer');
+            container.style.transform = `translateX(-${pageIndex * 25}%)`;
+            
+            // Update active dot
+            document.querySelectorAll('.dot').forEach((dot, index) => {
+                if (index === pageIndex) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+
+        // Show/hide beginner path
+        function showBeginnerPath() {
+            document.getElementById('learningOverview').style.display = 'none';
+            document.getElementById('beginnerPath').classList.add('active');
+            scrollToPage(0);
+        }
+        
+        function hideBeginnerPath() {
+            document.getElementById('learningOverview').style.display = 'block';
+            document.getElementById('beginnerPath').classList.remove('active');
+        }
+        
+        // Show/hide intermediate path
+        function showIntermediatePath() {
+            document.getElementById('learningOverview').style.display = 'none';
+            document.getElementById('intermediatePath').classList.add('active');
+            scrollToPage(3);
+        }
+        
+        function hideIntermediatePath() {
+            document.getElementById('learningOverview').style.display = 'block';
+            document.getElementById('intermediatePath').classList.remove('active');
+            scrollToPage(0);
+        }
+        
+        // Show/hide advanced path
+        function showAdvancedPath() {
+            document.getElementById('learningOverview').style.display = 'none';
+            document.getElementById('advancedPath').classList.add('active');
+            scrollToPage(2);
+        }
+        
+        function hideAdvancedPath() {
+            document.getElementById('learningOverview').style.display = 'block';
+            document.getElementById('advancedPath').classList.remove('active');
+            scrollToPage(0);
+        }
+
+        // Shopping cart functionality
+        let cart = [];
+        const cartButton = document.getElementById('cartButton');
+        const cartCount = document.querySelector('.cart-count');
+        
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', function() {
+                const id = this.getAttribute('data-id');
+                const name = this.getAttribute('data-name');
+                const price = parseInt(this.getAttribute('data-price'));
+                
+                // Add to cart
+                cart.push({
+                    id: id,
+                    name: name,
+                    price: price
+                });
+                
+                // Update cart count
+                cartCount.textContent = cart.length;
+                
+                // Visual feedback
+                this.innerHTML = '<i class="fas fa-check"></i>';
+                this.style.background = 'rgba(0, 255, 204, 0.2)';
+                this.style.color = 'var(--accent-teal)';
+                
+                setTimeout(() => {
+                    this.innerHTML = '<i class="fas fa-cart-plus"></i>';
+                    this.style.background = 'rgba(170, 0, 255, 0.1)';
+                    this.style.color = 'var(--accent-purple)';
+                }, 2000);
+            });
+        });
+        
+        cartButton.addEventListener('click', function() {
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+            } else {
+                let cartContent = 'Items in your cart:\n\n';
+                let total = 0;
+                
+                cart.forEach(item => {
+                    cartContent += `• ${item.name} - R${item.price}\n`;
+                    total += item.price;
+                });
+                
+                cartContent += `\nTotal: R${total}`;
+                alert(cartContent);
+            }
+        });
+
+        // Filter buttons
+        document.querySelectorAll('.filter-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                document.querySelectorAll('.filter-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+        
+        // Intermediate page functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load News Button
+            document.getElementById('loadNews').addEventListener('click', async () => {
+                const content = document.getElementById('dynamicContent');
+                content.innerHTML = '<p><i class="fas fa-spinner fa-spin"></i> Loading news...</p>';
+                
+                try {
+                    // Simulate API call with timeout
+                    setTimeout(() => {
+                        const news = [
+                            { title: 'CSS Grid Layout Becomes Standard in All Major Browsers', date: 'Aug 12, 2025' },
+                            { title: 'New Flexbox Features Simplify Responsive Design', date: 'Aug 5, 2025' },
+                            { title: 'JavaScript Frameworks Adopt New Rendering Techniques', date: 'July 28, 2025' },
+                            { title: 'Web Performance Optimization Reaches New Heights', date: 'July 20, 2025' }
+                        ];
+                        
+                        let html = '<h3 style="color: var(--accent-cyan); margin-bottom: 15px;">Latest Web Development News</h3>';
+                        news.forEach(item => {
+                            html += `
+                                <div class="news-item">
+                                    <strong>${item.title}</strong>
+                                    <div>${item.date}</div>
+                                </div>
+                            `;
+                        });
+                        
+                        content.innerHTML = html;
+                    }, 1000);
+                } catch (error) {
+                    content.innerHTML = `<p style="color: var(--accent-pink);">Error loading news: ${error.message}</p>`;
+                }
+            });
+            
+            // Change Color Theme Button
+            document.getElementById('changeColor').addEventListener('click', () => {
+                const colors = ['#4361ee', '#3a0ca3', '#7209b7', '#f72585', '#4cc9f0', '#2ec4b6', '#e71d36', '#ff9f1c'];
+                const randomColor = colors[Math.floor(Math.random() * colors.length)];
+                document.documentElement.style.setProperty('--accent-pink', randomColor);
+                
+                const content = document.getElementById('dynamicContent');
+                content.innerHTML = `<p>Theme color changed to <strong style="color: ${randomColor}">${randomColor}</strong></p>`;
+            });
+            
+            // Add Item Button
+            let itemCount = 0;
+            document.getElementById('addItem').addEventListener('click', () => {
+                itemCount++;
+                const content = document.getElementById('dynamicContent');
+                const newItem = document.createElement('div');
+                newItem.className = 'news-item';
+                newItem.innerHTML = `<strong>New Item #${itemCount}</strong><div>Added at ${new Date().toLocaleTimeString()}</div>`;
+                
+                if (content.firstChild && content.firstChild.nodeName === 'P') {
+                    content.innerHTML = '';
+                }
+                
+                content.prepend(newItem);
+            });
+            
+            // Counter functionality
+            let count = 0;
+            const counterValue = document.getElementById('counterValue');
+            
+            document.getElementById('increment').addEventListener('click', () => {
+                count++;
+                counterValue.textContent = count;
+            });
+            
+            document.getElementById('decrement').addEventListener('click', () => {
+                if (count > 0) count--;
+                counterValue.textContent = count;
+            });
+        });
+    </script>
+</body>
+</html>
